@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 
-const limit = 10;
+const limit = 6;
 
 // Import the Meetup API library, for easily using the Meetup API 
 var meetup = require('meetup-api')({
