@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import * as R from 'ramda';
 import './App.css';
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+let globalDelay = 0;
+
+function sleep() {
+  globalDelay += 600;
+  return new Promise(resolve => setTimeout(resolve, globalDelay));
 }
 
 class App extends Component {
@@ -14,8 +17,6 @@ class App extends Component {
     this.state = {
       stats: {_2017: null, _2018: null}
     }
-
-    this.delay = 0;
   }
 
   async componentDidMount() {
@@ -123,16 +124,15 @@ class App extends Component {
   }
 
   async getEventsForGroup(groupUrlName, year) {
-    // Add an delay, because of the Meetup API rate limit 
-    await sleep(this.delay);
-    this.delay += 2500;
-
     // Set year if it was not set
     if(!year) year = 2018;
 
     // Set timespan
     let fromTimestamp = new Date(year + '-01-01').getTime();
     let toTimestamp = new Date(year + '-12-31').getTime();
+
+    // Add an delay, because of the Meetup API rate limit 
+    await sleep();
 
     // Get events for this group & timespan
     const response = await fetch('/api/getEvents?groupUrlName='+groupUrlName+'&fromTimestamp='+fromTimestamp+'&toTimestamp='+toTimestamp);
