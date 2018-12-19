@@ -210,7 +210,7 @@ class App extends Component {
             
             <div className="group-list">
 
-              {R.map(this.renderGroup.bind(this), rsvpList2018)}
+              {R.map(this.renderGroup.bind(this), thtRsvpList2018)}
 
               <div className="group-list-row">
                 <b>Total RSVP's</b>
