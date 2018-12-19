@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
 
+const limit = 10;
+
 // Import the Meetup API library, for easily using the Meetup API 
 var meetup = require('meetup-api')({
-  key: '292e34c5b515f2a58356c51c702273'
+  key: '2b2d6256e60525527675c6d494c4660'
 });
 
 app.set("port", process.env.PORT || 3001);
@@ -25,15 +27,26 @@ app.get("/api/findLocations", async (req, res) => {
 });
 
 app.get("/api/findGroups", async (req, res) => {
-
   await meetup.findGroups({
-    city: "The Hague",
-    page: 3
+    category: 34,
+    radius: 4,
+    lon: 4.330529,
+    lat: 52.081776,
+    page: limit
   }, function (err, results) {
     res.json(results);
   });
-
   // const param = req.query.q;
+});
+
+app.get("/api/getEvents", async (req, res) => {
+  await meetup.getEvents({
+    status: "past",
+    group_urlname: req.query.groupUrlName,
+    time: req.query.fromTimestamp + ',' + req.query.toTimestamp
+  }, function (err, results) {
+    res.json(results);
+  });
 });
 
 app.listen(app.get("port"), () => {
