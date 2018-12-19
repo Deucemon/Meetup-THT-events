@@ -55,15 +55,18 @@ class App extends Component {
     const groups = await this.getGroups()
 
     const events = await this.getEvents(groups, year)
-    const thtEvents = R.filter(isThtEvent, events)
-
     const rsvps  = this.getRsvpsPerGroup(events)
+
+    // The Hague Tech (THT) only
+    const thtEvents = R.filter(isThtEvent, events)
+    const thtRsvps  = this.getRsvpsPerGroup(thtEvents)
 
     return {
       groups: groups,
       events: events,
+      rsvps: rsvps,
       thtEvents: thtEvents,
-      rsvps: rsvps
+      thtRsvps: thtRsvps
     }
 
     // const onlyFromGroup = (groupName) =>
@@ -155,6 +158,17 @@ class App extends Component {
       }
     }
 
+    let thtRsvpList2018 = [], thtTotalRsvps2018 = 0;
+    if(this.state.stats._2018 && this.state.stats._2018.thtRsvps) {
+      for(let groupName in this.state.stats._2018.thtRsvps) {
+        thtRsvpList2018.push({
+          groupName: groupName,
+          rsvps: this.state.stats._2018.thtRsvps[groupName]
+        });
+        thtTotalRsvps2018 += this.state.stats._2018.thtRsvps[groupName];
+      }
+    }
+
     return (
       <div className="App">
 
@@ -186,6 +200,8 @@ class App extends Component {
 
             </div>
 
+            <hr />
+
             <h3>
               Groups at The Hague Tech /
               <span> {this.state.stats._2018 && this.state.stats._2018.thtEvents.length} </span>
@@ -194,11 +210,11 @@ class App extends Component {
             
             <div className="group-list">
 
-              {R.map(this.renderGroup.bind(this), rsvpList2018)}
+              {R.map(this.renderGroup.bind(this), thtRsvpList2018)}
 
               <div className="group-list-row">
                 <b>Total RSVP's</b>
-                <span>{totalRsvps2018}</span>
+                <span>{thtTotalRsvps2018}</span>
               </div>
 
             </div>
