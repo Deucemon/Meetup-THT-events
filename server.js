@@ -1,7 +1,10 @@
 const express = require("express");
 const app = express();
 
-var meetup = require('meetup-api')();
+// Import the Meetup API library, for easily using the Meetup API 
+var meetup = require('meetup-api')({
+  key: '292e34c5b515f2a58356c51c702273'
+});
 
 app.set("port", process.env.PORT || 3001);
 
@@ -10,34 +13,27 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-app.get("/api/findLocations", (req, res) => {
+// Method: findLocations
+app.get("/api/findLocations", async (req, res) => {
 
-  // meetup.findLocations({
-  //   query: 'Córdoba'
-  // }, function (err, results) {
-  //     console.log(results);
-  // });
-
-  // const param = req.query.q;
-  res.json({
-    'test': 'test'
+  await meetup.findLocations({
+    query: 'The Hague'
+  }, function (err, results) {
+    res.json(results);
   });
+
 });
 
-app.get("/api/getCities", (req, res) => {
+app.get("/api/findGroups", async (req, res) => {
 
-  // meetup.getCities({
-  //   lat: -34.603722,
-  //   lon: -58.381592,
-  //   country: 'AR'
-  // }, function (err, results) {
-  //     console.log(results);
-  // });
+  await meetup.findGroups({
+    city: "The Hague",
+    page: 3
+  }, function (err, results) {
+    res.json(results);
+  });
 
   // const param = req.query.q;
-  res.json({
-    'test': 'test'
-  });
 });
 
 app.listen(app.get("port"), () => {
