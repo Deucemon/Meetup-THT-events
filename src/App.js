@@ -3,11 +3,40 @@ import * as R from 'ramda';
 import './App.css';
 
 let globalDelay = 0;
+let thtPercentage = 0;
 
 function sleep() {
   globalDelay += 600;
   return new Promise(resolve => setTimeout(resolve, globalDelay));
 }
+
+/* 
+ * Tabs function
+ */
+
+ function openYear(evt, year) {
+	 /* Declare all variables */
+	 let index, tabcontent, tablinks;
+
+	 /* Get all elements with class="tabcontent" and hide them*/
+	 tabcontent = document.getElementsByClassName("tabcontent");
+	 for (index = 0; index < tabcontent.length; index++) {
+	   tabcontent[index].style.display = "none";
+	 }
+
+	 /* Get all elements with class="tablinks" and remove the class "active" */
+  	 tablinks = document.getElementsByClassName("tablinks");
+  	 for (index = 0; index < tablinks.length; index++) {
+       tablinks[index].className = tablinks[index].className.replace("active", "");
+     }
+
+     /* Show the current tab, and add an "active" class to the button that opened the tab */
+  	 document.getElementById(year).style.display = "block";
+  	 evt.currentTarget.className += " active";
+
+}
+
+
 
 class App extends Component {
 
@@ -42,10 +71,12 @@ class App extends Component {
           {data.groupName}
         </b>
 
+
         <span>
           {data.rsvps}
         </span>
       </p>
+
     )
   }
 
@@ -166,6 +197,7 @@ class App extends Component {
           rsvps: this.state.stats._2018.thtRsvps[groupName]
         });
         thtTotalRsvps2018 += this.state.stats._2018.thtRsvps[groupName];
+        thtPercentage = Math.round((thtTotalRsvps2018/totalRsvps2018)*100);
       }
     }
 
@@ -177,23 +209,26 @@ class App extends Component {
         <section className="Stats-the-hague">
 
           <nav className="tabs">
-            <a href="#2017">2017</a>
-            <a href="#2018">2018</a>
+          	<button className="tablinks" onClick="openYear(event, '2017')">2017</button>
+  			<button className="tablinks" onClick="openYear(event, '2018')">2018</button>
+            
           </nav>
 
           <div className="tab-container">
 
-            <h3>
+            <h2>
               Groups in The Hague /
               <span> {this.state.stats._2018 && this.state.stats._2018.events.length} </span>
               events
-            </h3>
+            </h2>
             
             <div className="group-list">
 
+              <font color="292525">	
               {R.map(this.renderGroup.bind(this), rsvpList2018)}
+              </font>
 
-              <div className="group-list-row">
+              <div className="group-list-row" id="rsvp1">
                 <b>Total RSVP's</b>
                 <span>{totalRsvps2018}</span>
               </div>
@@ -202,19 +237,27 @@ class App extends Component {
 
             <hr />
 
-            <h3>
+            <img src="https://www.thehaguetech.nl/images/THT_Anim_once.gif" width="100" alt="THT logo" />
+            <h2>
               Groups at The Hague Tech /
               <span> {this.state.stats._2018 && this.state.stats._2018.thtEvents.length} </span>
-              events
-            </h3>
+              events 
+            </h2>
             
             <div className="group-list">
-
+				
+			  <font color="292525">		
               {R.map(this.renderGroup.bind(this), thtRsvpList2018)}
+              </font>
 
-              <div className="group-list-row">
+              <div className="group-list-row"  id="rsvp2">
                 <b>Total RSVP's</b>
                 <span>{thtTotalRsvps2018}</span>
+              </div>
+
+			  <div className="group-list-row"  id="rsvp2">
+			  	<b>Percentage of Total RSVP's</b>	
+                <span>{thtPercentage}%</span> 
               </div>
 
             </div>
