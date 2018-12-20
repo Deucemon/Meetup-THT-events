@@ -45,11 +45,16 @@
 }
 
 /* Change background color of buttons on hover */
-.tabs button:hover {
+.tabs button:hover, .active {
   background-color: #D5C2BD;
 }
 
 /* Create an active/current tablink class */
 .tabs button.active {
-  background-color: #ccc;
+  background-color: #f64060;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0px;
 }
