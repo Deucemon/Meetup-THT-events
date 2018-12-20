@@ -1,3 +1,7 @@
+body {
+  color: #292525;
+}
+
 .App {
   padding: 25px;
 }
@@ -57,4 +61,8 @@
 ul {
   list-style-type: none;
   padding: 0px;
+}
+
+.react-tabs__tab--selected {
+  background-color: #f64060;
 }

@@ -7,7 +7,7 @@ let globalDelay = 0;
 let thtPercentage = 0;
 
 function sleep() {
-globalDelay += 6000;
+globalDelay += 1000;
 return new Promise(resolve => setTimeout(resolve, globalDelay));
 }
 
@@ -25,7 +25,7 @@ stats: {_2017: null, _2018: null}
 }
 
 async componentDidMount() {
-let _2017 = {};
+let _2017 = await this.getStats(2017);
 let _2018 = await this.getStats(2018);
 
 this.setState({
@@ -57,8 +57,14 @@ return (
 }
 
 async getStats(year) {
-const isThtEvent = (event) => event.venue && event.venue.name === 'The Hague Tech'
+//const isThtEvent = (event) => event.venue && event.venue.name === 'The Hague Tech'
 
+ const isThtEvent = (event) => {
+   if(event && event.venue)
+     return event.venue.name === 'The Hague Tech';
+   else
+     return false;
+ }
 const groups = await this.getGroups()
 
 const events = await this.getEvents(groups, year)
@@ -204,9 +210,9 @@ return (
 
 					<div className="group-list">
 
-						<font color="292525">	
-							{R.map(this.renderGroup.bind(this), rsvpList2018)}
-						</font>
+						
+						{R.map(this.renderGroup.bind(this), rsvpList2018)}
+						
 
 						<div className="group-list-row" id="rsvp1">
 							<b>Total RSVP's</b>
@@ -226,9 +232,9 @@ return (
 
 					<div className="group-list">
 
-						<font color="292525">		
-							{R.map(this.renderGroup.bind(this), thtRsvpList2018)}
-						</font>
+								
+						{R.map(this.renderGroup.bind(this), thtRsvpList2018)}
+						
 
 						<div className="group-list-row"  id="rsvp2">
 							<b>Total RSVP's</b>
@@ -257,9 +263,9 @@ return (
 
 					<div className="group-list">
 
-						<font color="292525">	
-							{R.map(this.renderGroup.bind(this), rsvpList2018)}
-						</font>
+							
+						{R.map(this.renderGroup.bind(this), rsvpList2018)}
+						
 
 						<div className="group-list-row" id="rsvp1">
 							<b>Total RSVP's</b>
@@ -279,9 +285,9 @@ return (
 
 					<div className="group-list">
 
-						<font color="292525">		
-							{R.map(this.renderGroup.bind(this), thtRsvpList2018)}
-						</font>
+								
+						{R.map(this.renderGroup.bind(this), thtRsvpList2018)}
+						
 
 						<div className="group-list-row"  id="rsvp2">
 							<b>Total RSVP's</b>
