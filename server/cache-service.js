@@ -7,7 +7,7 @@ const path = require('path')
 const currentDir = path.resolve(process.cwd(), 'server');
 
 const getCache = (name) => {
-  let filePath = currentDir + '/cache/groups.json';
+  let filePath = currentDir + '/cache/'+name+'.json';
   if (fs.existsSync(filePath)) {
     let rawdata = fs.readFileSync(filePath);  
     return JSON.parse(rawdata);
@@ -19,7 +19,7 @@ const getCache = (name) => {
 // writeCache :: String name, JSON json => void
 const writeCache = (name, json) => {
   let data = JSON.stringify(json);
-  fs.writeFileSync(currentDir + '/cache/groups.json', data, (err) => {
+  fs.writeFileSync(currentDir + '/cache/'+name+'.json', data, (err) => {
     if (err) throw err;
     console.log('The cache has been updated');
   });

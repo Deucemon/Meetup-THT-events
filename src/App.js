@@ -7,7 +7,7 @@ let globalDelay = 0;
 let thtPercentage = 0;
 
 function sleep() {
-  globalDelay += 1000;
+  globalDelay += 1500;
   return new Promise(resolve => setTimeout(resolve, globalDelay));
 }
 
@@ -19,18 +19,30 @@ class App extends Component {
     this.state = {
       stats: {_2017: null, _2018: null}
     }
+
   }
 
   async componentDidMount() {
-    let _2017 = await this.getStats(2017);
-    let _2018 = await this.getStats(2018);
+    const self = this;
 
-    this.setState({
-      'stats': {
-      _2017: _2017,
-      _2018: _2018
-      }
+    // Check if app has cache
+    await this.hasCache().then(async function(fromCache, err) {
+
+      // If so: set fromCache state
+      self.setState({ fromCache: fromCache });
+
+      // Then load results
+      let _2017 = await self.getStats(2017);
+      let _2018 = await self.getStats(2018);
+
+      self.setState({
+        'stats': {
+          _2017: _2017,
+          _2018: _2018
+        }
+      })
     })
+
   }
 
   /*
@@ -53,9 +65,13 @@ class App extends Component {
   }
 
   async getStats(year) {
+    // Function that filters on THT events
     const isThtEvent = (event) => event && event.venue && event.venue.name === 'The Hague Tech'
+
+    // Get groups
     const groups = await this.getGroups()
 
+    // Get events & RSVPs
     const events = await this.getEvents(groups, year)
     const rsvps  = this.getRsvpsPerGroup(events)
 
@@ -76,6 +92,13 @@ class App extends Component {
     //     event.group.urlname == groupName
     //   , events)
     // console.log(onlyFromGroup('oc070netwerkevent'))
+  }
+
+  async hasCache() {
+    const response = await fetch('/api/cache');
+    const json = await response.json();
+
+    return json.hasCache;
   }
 
   async getGroups() {
@@ -137,7 +160,8 @@ class App extends Component {
     let toTimestamp = new Date(year + '-12-31').getTime();
 
     // Add an delay, because of the Meetup API rate limit 
-    await sleep();
+    if(! this.state.fromCache)
+      await sleep();
 
     // Get events for this group & timespan
     const response = await fetch('/api/getEvents?groupUrlName='+groupUrlName+'&fromTimestamp='+fromTimestamp+'&toTimestamp='+toTimestamp);
