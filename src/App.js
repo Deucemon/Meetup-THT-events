@@ -50,18 +50,17 @@ class App extends Component {
   */
 
   renderGroup(data) {
-  return (
-  <p className="group-list-row" key={data.groupName}>
-  	<b>
-  		{data.groupName}
-  	</b>
+    return (
+      <p className="group-list-row" key={data.groupName}>
+      	<b>
+      		{data.groupName}
+      	</b>
 
-  	<span>
-  		{data.rsvps}
-  	</span>
-  </p>
-
-  )
+      	<span>
+      		{data.rsvps}
+      	</span>
+      </p>
+    )
   }
 
   async getStats(year) {
@@ -184,6 +183,8 @@ class App extends Component {
         totalRsvps2018 += this.state.stats._2018.rsvps[groupName];
       }
     }
+    rsvpList2018.sort((a, b) => a.rsvps - b.rsvps);
+    rsvpList2018.reverse();
 
     // Get totalRsvps of The Hague Tech events
     let thtRsvpList2018 = [], thtTotalRsvps2018 = 0;
@@ -197,6 +198,8 @@ class App extends Component {
         thtPercentage = Math.round((thtTotalRsvps2018/totalRsvps2018)*100);
       }
     }
+    thtRsvpList2018.sort((a, b) => a.rsvps - b.rsvps);
+    thtRsvpList2018.reverse();
 
     return (
       <div className="App">
