@@ -44,7 +44,6 @@ class App extends Component {
   		{data.groupName}
   	</b>
 
-
   	<span>
   		{data.rsvps}
   	</span>
@@ -150,6 +149,7 @@ class App extends Component {
 
   render() {
 
+    // Get totalRsvps in The Hague
     let rsvpList2018 = [], totalRsvps2018 = 0;
     if(this.state.stats._2018 && this.state.stats._2018.rsvps) {
       for(let groupName in this.state.stats._2018.rsvps) {
@@ -161,6 +161,7 @@ class App extends Component {
       }
     }
 
+    // Get totalRsvps of The Hague Tech events
     let thtRsvpList2018 = [], thtTotalRsvps2018 = 0;
     if(this.state.stats._2018 && this.state.stats._2018.thtRsvps) {
       for(let groupName in this.state.stats._2018.thtRsvps) {

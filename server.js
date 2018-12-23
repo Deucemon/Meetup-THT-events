@@ -1,7 +1,9 @@
+const { getCache, writeCache } = require("./server/cache-service.js");
+
 const express = require("express");
 const app = express();
 
-const limit = 9999;
+const limit = 3;
 
 // Import the Meetup API library, for easily using the Meetup API 
 var meetup = require('meetup-api')({
@@ -27,6 +29,15 @@ app.get("/api/findLocations", async (req, res) => {
 });
 
 app.get("/api/findGroups", async (req, res) => {
+
+  // Get from cache it's available there
+  let cache = await getCache('groups');
+  if(cache) {
+    res.json(cache);
+    return;
+  }
+
+  // Query Meetup API
   await meetup.findGroups({
     category: 34,
     radius: 4,
@@ -35,8 +46,9 @@ app.get("/api/findGroups", async (req, res) => {
     page: limit
   }, function (err, results) {
     res.json(results);
+    writeCache('groups', results);
   });
-  // const param = req.query.q;
+
 });
 
 app.get("/api/getEvents", async (req, res) => {
