@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "concurrently": "^4.1.0",
     "meetup-api": "^1.4.35",
     "ramda": "^0.26.1",
     "ramda-fantasy": "^0.8.0",

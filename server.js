@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Method: findLocations
 app.get("/api/cache", async (req, res) => {
   let cache = await getCache('groups')
   if(cache)

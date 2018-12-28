@@ -4,7 +4,11 @@ import './App.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 let globalDelay = 0;
-let thtPercentage = 0;
+let thtPercentage2017 = 0;
+let thtPercentage2018 = 0;
+
+//if true limits the 2018 results to september
+const limit = false;
 
 function sleep() {
   globalDelay += 1500;
@@ -157,6 +161,10 @@ class App extends Component {
     // Set timespan
     let fromTimestamp = new Date(year + '-01-01').getTime();
     let toTimestamp = new Date(year + '-12-31').getTime();
+    if (year === 2018 && limit === true) {
+      fromTimestamp = new Date(year + '-01-01').getTime();
+      toTimestamp = new Date(year + '-09-30').getTime();
+    }
 
     // Add an delay, because of the Meetup API rate limit 
     if(! this.state.fromCache)
@@ -172,7 +180,38 @@ class App extends Component {
 
   render() {
 
-    // Get totalRsvps in The Hague
+    // Get totalRsvps in The Hague 2017
+    let rsvpList2017 = [], totalRsvps2017 = 0;
+    if(this.state.stats._2017 && this.state.stats._2017.rsvps) {
+      for(let groupName in this.state.stats._2017.rsvps) {
+        rsvpList2017.push({
+          groupName: groupName,
+          rsvps: this.state.stats._2017.rsvps[groupName]
+        });
+        totalRsvps2017 += this.state.stats._2017.rsvps[groupName];
+      }
+    }
+    rsvpList2017.sort((a, b) => a.rsvps - b.rsvps);
+    rsvpList2017.reverse();
+
+
+    // Get totalRsvps of The Hague Tech events 2017
+    let thtRsvpList2017 = [], thtTotalRsvps2017 = 0;
+    if(this.state.stats._2017 && this.state.stats._2017.thtRsvps) {
+      for(let groupName in this.state.stats._2017.thtRsvps) {
+        thtRsvpList2017.push({
+          groupName: groupName,
+          rsvps: this.state.stats._2017.thtRsvps[groupName]
+        });
+        thtTotalRsvps2017 += this.state.stats._2017.thtRsvps[groupName];
+        thtPercentage2017 = Math.round((thtTotalRsvps2017/totalRsvps2017)*100);
+      }
+    }
+    thtRsvpList2017.sort((a, b) => a.rsvps - b.rsvps);
+    thtRsvpList2017.reverse();
+
+
+    // Get totalRsvps in The Hague 2018
     let rsvpList2018 = [], totalRsvps2018 = 0;
     if(this.state.stats._2018 && this.state.stats._2018.rsvps) {
       for(let groupName in this.state.stats._2018.rsvps) {
@@ -186,7 +225,8 @@ class App extends Component {
     rsvpList2018.sort((a, b) => a.rsvps - b.rsvps);
     rsvpList2018.reverse();
 
-    // Get totalRsvps of The Hague Tech events
+
+    // Get totalRsvps of The Hague Tech events 2018
     let thtRsvpList2018 = [], thtTotalRsvps2018 = 0;
     if(this.state.stats._2018 && this.state.stats._2018.thtRsvps) {
       for(let groupName in this.state.stats._2018.thtRsvps) {
@@ -195,7 +235,7 @@ class App extends Component {
           rsvps: this.state.stats._2018.thtRsvps[groupName]
         });
         thtTotalRsvps2018 += this.state.stats._2018.thtRsvps[groupName];
-        thtPercentage = Math.round((thtTotalRsvps2018/totalRsvps2018)*100);
+        thtPercentage2018 = Math.round((thtTotalRsvps2018/totalRsvps2018)*100);
       }
     }
     thtRsvpList2018.sort((a, b) => a.rsvps - b.rsvps);
@@ -221,16 +261,16 @@ class App extends Component {
 
       					<h2>
       						Groups in The Hague /
-      						<span> {this.state.stats._2018 && this.state.stats._2018.events.length} </span>
+      						<span> {this.state.stats._2017 && this.state.stats._2017.events.length} </span>
       						events
       					</h2>
 
       					<div className="group-list">
-      						{R.map(this.renderGroup.bind(this), rsvpList2018)}
+      						{R.map(this.renderGroup.bind(this), rsvpList2017)}
       						
       						<div className="group-list-row" id="rsvp1">
       							<b>Total RSVP's</b>
-      							<span>{totalRsvps2018}</span>
+      							<span>{totalRsvps2017}</span>
       						</div>
 
       					</div>
@@ -240,22 +280,22 @@ class App extends Component {
       					<img src="https://www.thehaguetech.nl/images/THT_Anim_once.gif" width="100" alt="THT logo" />
       					<h2>
       						Groups at The Hague Tech /
-      						<span> {this.state.stats._2018 && this.state.stats._2018.thtEvents.length} </span>
+      						<span> {this.state.stats._2017 && this.state.stats._2017.thtEvents.length} </span>
       						events 
       					</h2>
 
       					<div className="group-list">
 
-      						{R.map(this.renderGroup.bind(this), thtRsvpList2018)}
+      						{R.map(this.renderGroup.bind(this), thtRsvpList2017)}
 
       						<div className="group-list-row"  id="rsvp2">
       							<b>Total RSVP's</b>
-      							<span>{thtTotalRsvps2018}</span>
+      							<span>{thtTotalRsvps2017}</span>
       						</div>
 
       						<div className="group-list-row"  id="rsvp2">
       							<b>Percentage of Total RSVP's</b>	
-      							<span>{thtPercentage}%</span> 
+      							<span>{thtPercentage2017}%</span> 
       						</div>
 
       					</div>
@@ -263,9 +303,11 @@ class App extends Component {
       				</div>
 
       			</TabPanel>
+            {/*
+             * 2018 panel
+             */}
       			<TabPanel>
-      				     2018
-      					<div className="tab-container">
+      				 	<div className="tab-container">
 
       					<h2>
       						Groups in The Hague /
@@ -305,7 +347,7 @@ class App extends Component {
 
       						<div className="group-list-row"  id="rsvp2">
       							<b>Percentage of Total RSVP's</b>	
-      							<span>{thtPercentage}%</span> 
+      							<span>{thtPercentage2018}%</span> 
       						</div>
 
       					</div>

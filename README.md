@@ -1,5 +1,13 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Required Node version
+
+10.14.2
+
+If you use Node Version Manager, execute:
+
+	nvm use 10.14.2
+
 ## Available Scripts
 
 In the project directory, you can run:
