@@ -1,4 +1,4 @@
-const { getCache, writeCache } = require("./server/cache-service.js");
+const { getCache, writeCache } = require("./cache-service.js");
 
 const express = require("express");
 const app = express();

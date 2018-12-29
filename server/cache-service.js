@@ -4,7 +4,7 @@ const fs = require('fs')
 const path = require('path')
 
 //https://stackabuse.com/reading-and-writing-json-files-with-node-js/
-const currentDir = path.resolve(process.cwd(), 'server');
+const currentDir = path.resolve(process.cwd(), '');
 
 const getCache = (name) => {
   let filePath = currentDir + '/cache/'+name+'.json';
