@@ -6,6 +6,13 @@ body {
   padding: 25px;
 }
 
+.App-intro {
+  font-size: 1.4em;
+  margin: 0 auto;
+  max-width: 100%;
+  width: 640px;
+}
+
 .tabs {
   display: flex;
   justify-content: flex-start;
