@@ -1,9 +1,8 @@
 {
-  "name": "meetup-tht-stats",
+  "name": "meetup-tht-stats-client",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "concurrently": "^4.1.0",
     "meetup-api": "^1.4.35",
     "ramda": "^0.26.1",
     "ramda-fantasy": "^0.8.0",
@@ -27,8 +26,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "engines": {
-    "node": "10.x"
-  },
   "proxy": "http://localhost:3001"
 }

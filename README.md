@@ -8,6 +8,12 @@ If you use Node Version Manager, execute:
 
 	nvm use 10.14.2
 
+## Heroku deployment information
+
+The Heroku configuration is based on:
+
+    https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
+
 ## Available Scripts
 
 In the project directory, you can run:

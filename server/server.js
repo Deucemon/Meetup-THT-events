@@ -1,7 +1,8 @@
 const { getCache, writeCache } = require("./cache-service.js");
 
-const express = require("express");
-const app = express();
+const express = require("express")
+const path = require("path")
+const app = express()
 
 const limit = 99999;
 
@@ -16,6 +17,10 @@ app.set("port", process.env.PORT || 3001);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
+const staticFiles = express.static(path.join(__dirname, '../../client/build'))
+
+app.use(staticFiles)
 
 app.get("/api/cache", async (req, res) => {
   let cache = await getCache('groups')
@@ -94,6 +99,9 @@ app.get("/api/getEvents", async (req, res) => {
 
 });
 
+app.use('/*', staticFiles)
+
+app.set('port', (process.env.PORT || 3001));
 app.listen(app.get("port"), () => {
   console.log(`Find the server at: http://localhost:${app.get("port")}/`); // eslint-disable-line no-console
 });
