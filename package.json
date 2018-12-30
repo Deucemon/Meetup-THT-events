@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "chart.js": "^2.7.3",
     "concurrently": "^4.1.0",
-     "rimraf": "^2.5.4"
+    "react-chartjs-2": "^2.7.4",
+    "rimraf": "^2.5.4"
   },
   "scripts": {
     "build": "concurrently \"cd client && npm run build\" \"cd server && npm run build\"",
