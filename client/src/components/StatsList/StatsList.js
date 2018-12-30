@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import './StatsList.css';
 import * as R from 'ramda';
 
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-
 let globalDelay = 0;
 let thtPercentage2017 = 0;
 let thtPercentage2018 = 0;
@@ -67,7 +65,6 @@ export default class StatsList extends Component {
       </p>
     )
   }
-
 
   async getStats(year) {
     // Function that filters on THT events
@@ -247,114 +244,43 @@ export default class StatsList extends Component {
     return (
       <div className="StatsList">
 
-        <Tabs>
-          <TabList>
-            <nav className="tabs">
-              <Tab><button>2017</button></Tab>
-              <Tab><button>2018</button></Tab>
-            </nav>
-          </TabList>
-          <TabPanel>
+        <h2>
+          Groups in The Hague /
+          <span> {this.state.stats._2017 && this.state.stats._2017.events.length} </span>
+          events
+        </h2>
 
-            <div className="tab-container">
+        <div className="group-list">
+          {R.map(this.renderGroup.bind(this), rsvpList2017)}
+          
+          <div className="group-list-row" id="rsvp1">
+            <b>Total RSVP's</b>
+            <span>{totalRsvps2017}</span>
+          </div>
 
-              <h2>
-                Groups in The Hague /
-                <span> {this.state.stats._2017 && this.state.stats._2017.events.length} </span>
-                events
-              </h2>
+        </div>
 
-              <div className="group-list">
-                {R.map(this.renderGroup.bind(this), rsvpList2017)}
-                
-                <div className="group-list-row" id="rsvp1">
-                  <b>Total RSVP's</b>
-                  <span>{totalRsvps2017}</span>
-                </div>
+        <hr />
 
-              </div>
+        <img src="https://www.thehaguetech.nl/images/THT_Anim_once.gif" width="100" alt="THT logo" />
 
-              <hr />
+        <h2>
+          Groups at The Hague Tech /
+          <span> {this.state.stats._2017 && this.state.stats._2017.thtEvents.length} </span>
+          events 
+        </h2>
 
-              <img src="https://www.thehaguetech.nl/images/THT_Anim_once.gif" width="100" alt="THT logo" />
-              <h2>
-                Groups at The Hague Tech /
-                <span> {this.state.stats._2017 && this.state.stats._2017.thtEvents.length} </span>
-                events 
-              </h2>
-
-              <div className="group-list">
-
-                {R.map(this.renderGroup.bind(this), thtRsvpList2017)}
-
-                <div className="group-list-row"  id="rsvp2">
-                  <b>Total RSVP's</b>
-                  <span>{thtTotalRsvps2017}</span>
-                </div>
-
-                <div className="group-list-row"  id="rsvp2">
-                  <b>Percentage of Total RSVP's</b> 
-                  <span>{thtPercentage2017}%</span> 
-                </div>
-
-              </div>
-
-            </div>
-
-          </TabPanel>
-          {/*
-           * 2018 panel
-           */}
-          <TabPanel>
-              <div className="tab-container">
-
-              <h2>
-                Groups in The Hague /
-                <span> {this.state.stats._2018 && this.state.stats._2018.events.length} </span>
-                events
-              </h2>
-
-              <div className="group-list">
-
-                  
-                {R.map(this.renderGroup.bind(this), rsvpList2018)}
-                
-
-                <div className="group-list-row" id="rsvp1">
-                  <b>Total RSVP's</b>
-                  <span>{totalRsvps2018}</span>
-                </div>
-
-              </div>
-
-              <hr />
-
-              <img src="https://www.thehaguetech.nl/images/THT_Anim_once.gif" width="100" alt="THT logo" />
-              <h2>
-                Groups at The Hague Tech /
-                <span> {this.state.stats._2018 && this.state.stats._2018.thtEvents.length} </span>
-                events 
-              </h2>
-
-              <div className="group-list">
-                {R.map(this.renderGroup.bind(this), thtRsvpList2018)}
-
-                <div className="group-list-row"  id="rsvp2">
-                  <b>Total RSVP's</b>
-                  <span>{thtTotalRsvps2018}</span>
-                </div>
-
-                <div className="group-list-row"  id="rsvp2">
-                  <b>Percentage of Total RSVP's</b> 
-                  <span>{thtPercentage2018}%</span> 
-                </div>
-
-              </div>
-
-            </div>
-
-          </TabPanel>
-        </Tabs> 
+        <div className="group-list">
+          {R.map(this.renderGroup.bind(this), thtRsvpList2017)}
+          <div className="group-list-row"  id="rsvp2">
+            <b>Total RSVP's</b>
+            <span>{thtTotalRsvps2017}</span>
+          </div>
+          <div className="group-list-row"  id="rsvp2">
+            <b>Percentage of Total RSVP's</b> 
+            <span>{thtPercentage2017}%</span> 
+          </div>
+        </div>
 
       </div>
     )

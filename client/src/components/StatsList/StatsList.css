@@ -1,3 +1,9 @@
+.StatsList {
+  max-width: 100%;
+  width: 960px;
+  margin: 0 auto;
+}
+
 .tabs {
   display: flex;
   justify-content: flex-start;
