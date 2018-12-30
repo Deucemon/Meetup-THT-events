@@ -90,6 +90,7 @@ body {
 }
 
 .Footer {
-  margin: 50px 10px 20px;
+  margin: 50px 20px 20px 20px;
   line-height: 28px;
+  color: #666;
 }
