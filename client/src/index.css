@@ -12,3 +12,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/*
+https://codepen.io/pcapetola/pen/aYayrK
+*/
+
+/* LINK STYLE 10
+------------------------*/
+.link-style-10 a {
+  background: linear-gradient(to left, rgba(255,255,255,0) 50%, #fff875 50%) 100% 98% / 220% 100% no-repeat;
+  color: #333;
+  cursor: pointer !important;
+  /*font: italic 500 20px / 1.35 "Raleway", Helvetica, Arial, Verdana, sans-serif;*/
+  padding: 0px 5px;
+  text-decoration: none !important;
+  border-bottom: #fff875 solid 3px;
+  transition: all .8s ease-in-out;
+}
+.link-style-10 a:hover, .link-style-10 a:focus {
+  background-position: 0 98%;
+  color: #000;
+  outline: none;
+  transition: all .2s ease-in-out;
+}
