@@ -88,3 +88,8 @@ body {
   padding: 15px;
   background: #fff;
 }
+
+.Footer {
+  margin: 50px 10px 20px;
+  line-height: 28px;
+}
