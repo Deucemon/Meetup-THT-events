@@ -9,16 +9,15 @@
 .group-list-row {
   display: flex;
   justify-content: space-between;
+  border-bottom: solid #eee 1px;
+  padding: 0 0 10px;
 }
 
 #rsvp1 {
-  background-color: #E5E3E3;
   color: #f64060;
-  margin-bottom:30px;
 }
 
 #rsvp2 {
-  background-color: #E5E3E3;
   color: #f64060;  
 }
 
