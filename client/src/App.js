@@ -3,6 +3,8 @@ import * as R from 'ramda';
 import './App.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
+import TextBlock from './components/TextBlock/TextBlock.js';
+
 let globalDelay = 0;
 let thtPercentage2017 = 0;
 let thtPercentage2018 = 0;
@@ -244,9 +246,8 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div class="App-intro">
 
-          <h1>The Hague - Tech</h1>
+        <TextBlock title="The Hague - Tech">
 
           <p>
             We are happy to see that <a href="https://denhaag.com/en" target="_blank">The Hague</a> is listed as one of the top growing tech cities in the world.
@@ -260,7 +261,7 @@ class App extends Component {
             A interactive overview of what happened in The Hague meetup scene last years.
           </p>
 
-        </div>
+        </TextBlock>
 
         <p>
       	  <img src="https://secure.meetup.com/s/img/0/logo/svg/logo--script.svg" width="200" alt="Meetup logo" />
