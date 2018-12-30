@@ -45,6 +45,7 @@ export default class StatsList extends Component {
           _2018: _2018
         }
       })
+
     })
 
   }
@@ -99,7 +100,7 @@ export default class StatsList extends Component {
   }
 
   async hasCache() {
-    const response = await fetch('/api/cache');
+    const response = await fetch('/api/cache?name=groups');
     const json = await response.json();
 
     return json.hasCache;

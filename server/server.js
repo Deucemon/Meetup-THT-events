@@ -22,15 +22,25 @@ const staticFiles = express.static(path.join(__dirname, '../../client/build'))
 
 app.use(staticFiles)
 
-app.get("/api/cache", async (req, res) => {
-  let cache = await getCache('groups')
-  if(cache)
-    return res.json({"hasCache": true});
+const hasCache = async (name) => {
+  if(! name)
+    return console.error('No name given to hasCache function');
 
-  res.json({"hasCache": false});
+  const cache = await getCache(name)
+
+  return cache;
+}
+
+// Get cache
+app.get("/api/cache", async (req, res) => {
+  if(! req.query.name)
+    return console.error('Please give a name for /api/cache?name=groups')
+
+  let cache = await getCache(req.query.name)
+  return res.json({ "hasCache": (cache ? true : false) });
 });
 
-// Method: findLocations
+// Find locations
 app.get("/api/findLocations", async (req, res) => {
 
   await meetup.findLocations({
@@ -80,10 +90,7 @@ app.get("/api/getEvents", async (req, res) => {
 
   // Get from cache it's available there
   let cache = await getCache(cacheName);
-  if(cache) {
-    res.json(cache);
-    return;
-  }
+  if(cache) return res.json(cache);
 
   // Query Meetup API
   await meetup.getEvents({
