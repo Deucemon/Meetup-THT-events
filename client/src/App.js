@@ -3,6 +3,7 @@ import './App.css';
 
 import TextBlock from './components/TextBlock/TextBlock.js';
 import StatsList from './components/StatsList/StatsList.js';
+import RsvpsThroughTime from './components/Charts/RsvpsThroughTime.js';
 
 class App extends Component {
 
@@ -25,6 +26,8 @@ class App extends Component {
           </p>
 
         </TextBlock>
+
+        <RsvpsThroughTime />
 
         <p hidden>
       	  <img src="https://secure.meetup.com/s/img/0/logo/svg/logo--script.svg" width="200" alt="Meetup logo" />

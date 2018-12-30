@@ -5,6 +5,7 @@
   "dependencies": {
     "chart.js": "^2.7.3",
     "concurrently": "^4.1.0",
+    "react": "^16.7.0",
     "react-chartjs-2": "^2.7.4",
     "rimraf": "^2.5.4"
   },
