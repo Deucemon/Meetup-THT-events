@@ -18,7 +18,7 @@ class AppTab extends Component {
     return (
       <div className="tab-container">
 
-        <div className="flex" style={{margin: '40px 0'}}>
+        <div className="flex">
           <ChartBlock title="Groups" primaryStat="200" secondaryStat="10 at The Hague Tech" backgroundColor="#b35da0" />
           <ChartBlock title="RSVP's" primaryStat="200" secondaryStat="10 at The Hague Tech" backgroundColor="#f28a17" />
           <ChartBlock title="Events" primaryStat="200" secondaryStat="10 at The Hague Tech" backgroundColor="#f0c214" />
@@ -61,20 +61,22 @@ class App extends Component {
 
         </TextBlock>
 
-        <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-          <TabList>
-            <nav className="tabs">
-              <Tab><button>2017</button></Tab>
-              <Tab><button>2018</button></Tab>
-            </nav>
-          </TabList>
-          <TabPanel>
-            <AppTab year={this.state.tabIndex + 2017}></AppTab>
-          </TabPanel>
-          <TabPanel>
-            <AppTab year={this.state.tabIndex + 2017}></AppTab>
-          </TabPanel>
-        </Tabs>
+        <div class="App-tabs-wrapper">
+          <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+            <TabList>
+              <nav className="tabs">
+                <Tab><button>2017</button></Tab>
+                <Tab><button>2018</button></Tab>
+              </nav>
+            </TabList>
+            <TabPanel>
+              <AppTab year={this.state.tabIndex + 2017}></AppTab>
+            </TabPanel>
+            <TabPanel>
+              <AppTab year={this.state.tabIndex + 2017}></AppTab>
+            </TabPanel>
+          </Tabs>
+        </div>
 
       </div>
     );

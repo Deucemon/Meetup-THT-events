@@ -4,17 +4,6 @@
   margin: 0 auto;
 }
 
-.tabs {
-  display: flex;
-  justify-content: flex-start;
-  background-color:#E5E3E3;
-}
-
-.tab-container {
-  border: solid #eee 1px;
-  padding: 15px;
-}
-
 .group-list {
 }
 .group-list-row {

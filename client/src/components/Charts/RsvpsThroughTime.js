@@ -15,7 +15,7 @@ export default class RsvpsThroughTime extends Component {
       labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [{
         label: 'The Hague',
-        backgroundColor: '#49b07b',
+        backgroundColor: '#00a45a',
         data: [
           randomScalingFactor(),
           randomScalingFactor(),
@@ -27,7 +27,7 @@ export default class RsvpsThroughTime extends Component {
         ]
       }, {
         label: 'The Hague Tech',
-        backgroundColor: '#1126a9',
+        backgroundColor: '#3cabe2',
         data: [
           randomScalingFactor(),
           randomScalingFactor(),
@@ -49,7 +49,7 @@ export default class RsvpsThroughTime extends Component {
           options={{
             title: {
               display: true,
-              text: 'RSVP\'s through time: The Hague (Tech)'
+              text: 'RSVP\'s through time'
             },
             tooltips: {
               mode: 'index',
