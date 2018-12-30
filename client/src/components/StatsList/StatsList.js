@@ -74,16 +74,11 @@ export default class StatsList extends Component {
       thtRsvps: thtRsvps
     }
 
-    // const onlyFromGroup = (groupName) =>
-    //   R.filter((event) =>
-    //     event.group.urlname == groupName
-    //   , events)
-    // console.log(onlyFromGroup('oc070netwerkevent'))
   }
 
   render() {
 
-    // Get totalRsvps in The Hague 2017
+    // Get totalRsvps in The Hague
     let rsvpList = [], totalRsvps = 0;
     if(this.state.stats && this.state.stats.rsvps) {
       for(let groupName in this.state.stats.rsvps) {
@@ -97,7 +92,7 @@ export default class StatsList extends Component {
     rsvpList.sort((a, b) => a.rsvps - b.rsvps);
     rsvpList.reverse();
 
-    // Get totalRsvps of The Hague Tech events 2017
+    // Get totalRsvps of The Hague Tech events
     let thtRsvpList = [], thtTotalRsvps = 0;
     if(this.state.stats && this.state.stats.thtRsvps) {
       for(let groupName in this.state.stats.thtRsvps) {

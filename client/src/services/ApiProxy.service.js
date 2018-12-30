@@ -58,9 +58,9 @@ async function getEventsForGroup(groupUrlName, year, hasDelay = true) {
   let toTimestamp = new Date(year + '-12-31').getTime();
 
   // For 2018, only get results until end of September
-  if (year === 2018 && !limit) {
-    toTimestamp = new Date(year + '-09-30').getTime();
-  }
+  // if (year === 2018 && !limit) {
+  //   toTimestamp = new Date(year + '-09-30').getTime();
+  // }
 
   // Add an delay, because of the Meetup API rate limit 
   if(hasDelay)
