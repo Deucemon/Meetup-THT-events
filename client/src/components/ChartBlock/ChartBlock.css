@@ -1,0 +1,33 @@
+.ChartBlock {
+  background-color: #0da58e;
+  color: #fff;
+  padding: 15px;
+  margin: 10px 10px;
+  min-width: 240px;
+  flex: 1;
+  border-radius: 5px;
+  height: 100px;
+
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.ChartBlock h1 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-top: 0;
+  margin-bottom: 3px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  padding-bottom: 10px;
+}
+
+.ChartBlock > div {
+  display: flex;
+  justify-content: space-between;
+}
+.ChartBlock b {
+  display: block;
+}
