@@ -4,13 +4,20 @@
   margin: 0 auto;
 }
 
+.StatsList h2 {
+  line-height: 34px;
+}
+
 .group-list {
 }
 .group-list-row {
   display: flex;
   justify-content: space-between;
   border-bottom: solid #fafafa 1px;
-  padding: 0 0 10px;
+  padding: 0 0 2px;
+}
+.group-list-row a {
+  line-height: 26px;
 }
 
 #rsvp1 {
