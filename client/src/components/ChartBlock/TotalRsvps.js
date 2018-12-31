@@ -38,11 +38,11 @@ export default class TotalRsvps extends Component {
 
     // Calculate amount of RSVPs
     let rsvpsAmount = 0
-    for(let key in rsvps) rsvpsAmount += rsvps[key]
+    for(let key in rsvps) rsvpsAmount += rsvps[key].rsvps
 
     // Calculate amount of THT based RSVPs
     let thtRsvpsAmount = 0
-    for(let key in thtRsvps) thtRsvpsAmount += rsvps[key]
+    for(let key in thtRsvps) thtRsvpsAmount += rsvps[key].rsvps
 
     // Set state
     this.setState({
