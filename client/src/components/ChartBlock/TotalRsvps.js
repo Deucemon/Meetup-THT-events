@@ -42,10 +42,10 @@ export default class TotalRsvps extends Component {
 
     // Calculate amount of THT based RSVPs
     let thtRsvpsAmount = 0
-    for(let key in thtRsvps) thtRsvpsAmount += rsvps[key].rsvps
+    for(let key in thtRsvps) thtRsvpsAmount += thtRsvps[key].rsvps
 
     // Calculate percentage of RSVPs at THT
-    let percentageOfThtRsvps = Math.round(thtRsvpsAmount / rsvpsAmount * 100)
+    let percentageOfThtRsvps = Math.round((thtRsvpsAmount / rsvpsAmount) * 100)
 
     // Set localStorage
     localStorage.setItem('numberOfRsvps' + this.props.year, rsvpsAmount);
