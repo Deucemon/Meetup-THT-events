@@ -10,8 +10,8 @@ export default class TotalEvents extends Component {
     super(props);
 
     this.state = {
-      numberOfEvents: 0,
-      percentageOfThtEvents: 0
+      numberOfEvents: localStorage.getItem('numberOfEvents' + props.year) || '...',
+      percentageOfThtEvents: localStorage.getItem('percentageOfThtEvents' + props.year) || '..'
     }
   }
 
@@ -34,10 +34,17 @@ export default class TotalEvents extends Component {
     // The Hague Tech (THT) only
     const thtEvents = R.filter(ApiProxy.isThtEvent, events)
 
+    // Calculate percentage of RSVPs at THT
+    let percentageOfThtEvents = Math.round(thtEvents.length / events.length * 100)
+
+    // Set localStorage
+    localStorage.setItem('numberOfEvents' + this.props.year, events.length);
+    localStorage.setItem('percentageOfThtRsvps' + this.props.year, percentageOfThtEvents);
+
     // Set state
     this.setState({
       numberOfEvents: events.length,
-      percentageOfThtEvents: Math.round(thtEvents.length / events.length * 100)
+      percentageOfThtEvents: percentageOfThtEvents
     })
   }
 

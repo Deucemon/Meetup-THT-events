@@ -8,7 +8,7 @@ export default class TotalGroups extends Component {
     super(props);
 
     this.state = {
-      numberOfGroups: 0
+      numberOfGroups: localStorage.getItem('numberOfGroups' + props.year) || '...',
     }
   }
 
@@ -19,6 +19,10 @@ export default class TotalGroups extends Component {
   async populateData() {
     // Get groups
     const groups = await ApiProxy.getGroups()
+
+    // Set localStorage
+    localStorage.setItem('numberOfGroups' + this.props.year, groups.length);
+
     // Set state
     this.setState({ numberOfGroups: groups.length })
   }
@@ -27,8 +31,8 @@ export default class TotalGroups extends Component {
     return (
       <ChartBlock title="Tech Groups"
                   primaryStat={this.state.numberOfGroups}
-                  secondaryStat={''}
-                  backgroundColor="#b35da0"
+                  secondaryStat={'currently in The Hague'}
+                  backgroundColor="#f28a17"
                   />
     )
   }

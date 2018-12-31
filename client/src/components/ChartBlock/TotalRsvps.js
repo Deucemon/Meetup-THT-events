@@ -10,8 +10,8 @@ export default class TotalRsvps extends Component {
     super(props);
 
     this.state = {
-      numberOfRsvps: 0,
-      percentageOfThtRsvps: 0
+      numberOfRsvps: localStorage.getItem('numberOfRsvps' + props.year) || '...',
+      percentageOfThtRsvps: '..'
     }
   }
 
@@ -44,10 +44,17 @@ export default class TotalRsvps extends Component {
     let thtRsvpsAmount = 0
     for(let key in thtRsvps) thtRsvpsAmount += rsvps[key].rsvps
 
+    // Calculate percentage of RSVPs at THT
+    let percentageOfThtRsvps = Math.round(thtRsvpsAmount / rsvpsAmount * 100)
+
+    // Set localStorage
+    localStorage.setItem('numberOfRsvps' + this.props.year, rsvpsAmount);
+    localStorage.setItem('percentageOfThtRsvps' + this.props.year, percentageOfThtRsvps);
+
     // Set state
     this.setState({
       numberOfRsvps: rsvpsAmount,
-      percentageOfThtRsvps: Math.round(thtRsvpsAmount / rsvpsAmount * 100)
+      percentageOfThtRsvps: percentageOfThtRsvps
     })
   }
 
@@ -56,7 +63,7 @@ export default class TotalRsvps extends Component {
       <ChartBlock title="RSVP's"
                   primaryStat={this.state.numberOfRsvps}
                   secondaryStat={`${this.state.percentageOfThtRsvps}% at The Hague Tech`}
-                  backgroundColor="#f28a17"
+                  backgroundColor="#b35da0"
                   />
     )
   }

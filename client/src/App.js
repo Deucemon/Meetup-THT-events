@@ -4,7 +4,6 @@ import './App.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import TextBlock from './components/TextBlock/TextBlock.js';
-import ChartBlock from './components/ChartBlock/ChartBlock.js';
 import TotalGroups from './components/ChartBlock/TotalGroups.js';
 import TotalEvents from './components/ChartBlock/TotalEvents.js';
 import TotalRsvps from './components/ChartBlock/TotalRsvps.js';
@@ -12,15 +11,14 @@ import StatsList from './components/StatsList/StatsList.js';
 import RsvpsThroughTime from './components/Charts/RsvpsThroughTime.js';
 
 class AppTab extends Component {
-
   render() {
     return (
       <div className="tab-container">
 
         <div className="flex">
-          <TotalGroups year={this.props.year} />
-          <TotalEvents year={this.props.year} />
           <TotalRsvps year={this.props.year} />
+          <TotalEvents year={this.props.year} />
+          <TotalGroups year={this.props.year} />
         </div>
 
         {/*<RsvpsThroughTime />*/}

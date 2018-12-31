@@ -6,7 +6,7 @@ const isThtEvent = (event) => event && event.venue && event.venue.name === 'The 
 let globalDelay = 0;
 
 // If true limits the 2018 results to september
-const limit = false;
+// const limit = false;
 
 function sleep() {
   globalDelay += 1500;
