@@ -43,7 +43,7 @@ export default class StatsList extends Component {
     return (
       <p className="group-list-row" key={data.groupName}>
         <b>
-          {data.groupName}
+          <a href={`https://www.meetup.com/${data.group_urlname}/`} target="_blank" rel="noopener noreferrer">{data.groupName}</a>
         </b>
 
         <span>
@@ -84,9 +84,10 @@ export default class StatsList extends Component {
       for(let groupName in this.state.stats.rsvps) {
         rsvpList.push({
           groupName: groupName,
-          rsvps: this.state.stats.rsvps[groupName]
+          rsvps: this.state.stats.rsvps[groupName].rsvps,
+          group_urlname: this.state.stats.rsvps[groupName].group_urlname
         });
-        totalRsvps += this.state.stats.rsvps[groupName];
+        totalRsvps += this.state.stats.rsvps[groupName].rsvps;
       }
     }
     rsvpList.sort((a, b) => a.rsvps - b.rsvps);
@@ -98,9 +99,10 @@ export default class StatsList extends Component {
       for(let groupName in this.state.stats.thtRsvps) {
         thtRsvpList.push({
           groupName: groupName,
-          rsvps: this.state.stats.thtRsvps[groupName]
+          rsvps: this.state.stats.thtRsvps[groupName].rsvps,
+          group_urlname: this.state.stats.rsvps[groupName].group_urlname
         });
-        thtTotalRsvps += this.state.stats.thtRsvps[groupName];
+        thtTotalRsvps += this.state.stats.thtRsvps[groupName].rsvps;
         thtPercentage = Math.round((thtTotalRsvps/totalRsvps)*100);
       }
     }
@@ -111,10 +113,10 @@ export default class StatsList extends Component {
       <div className="StatsList">
 
         <h2>
-          Groups in The Hague, {this.props.year}
+          RSVPs for groups in The Hague, {this.props.year}
         </h2>
 
-        <div className="group-list">
+        <div className="group-list link-style-10">
           {R.map(this.renderGroup.bind(this), rsvpList)}
           
           <div className="group-list-row" id="rsvp1">
@@ -125,10 +127,10 @@ export default class StatsList extends Component {
         </div>
 
         <h2>
-          Groups at The Hague Tech, {this.props.year}
+          RSVPs at The Hague Tech, {this.props.year}
         </h2>
 
-        <div className="group-list">
+        <div className="group-list link-style-10">
           {R.map(this.renderGroup.bind(this), thtRsvpList)}
           <div className="group-list-row"  id="rsvp2">
             <b>Total RSVP's</b>

@@ -9,7 +9,7 @@
 .group-list-row {
   display: flex;
   justify-content: space-between;
-  border-bottom: solid #eee 1px;
+  border-bottom: solid #fafafa 1px;
   padding: 0 0 10px;
 }
 

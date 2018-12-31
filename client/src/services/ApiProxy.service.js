@@ -88,11 +88,14 @@ function getRsvpsPerGroup(events) {
 
     // If this is the first event for this group: Return RSVP count.
     if( ! rsvpsPerGroup[event.group.name])
-      rsvpsPerGroup[event.group.name] = event.yes_rsvp_count;
+      rsvpsPerGroup[event.group.name] = {
+        rsvps: event.yes_rsvp_count,
+        group_urlname: event.group.urlname
+      }
 
     // Otherwise: Sum up
     else
-      rsvpsPerGroup[event.group.name] += event.yes_rsvp_count;
+      rsvpsPerGroup[event.group.name].rsvps += event.yes_rsvp_count;
   }
 
   return rsvpsPerGroup;
