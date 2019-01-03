@@ -29,7 +29,7 @@ export default class TotalRsvps extends Component {
     const groups = await ApiProxy.getGroups()
 
     // Get events
-    const events = await ApiProxy.getEvents(groups, this.props.year, !fromCache);
+    const events = await ApiProxy.getEventsForGroups(groups, this.props.year);
     const rsvps  = ApiProxy.getRsvpsPerGroup(events)
 
     // The Hague Tech (THT) only

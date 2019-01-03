@@ -34,7 +34,7 @@ const hasCache = async (name) => {
 // Get cache
 app.get("/api/cache", async (req, res) => {
   if(! req.query.name)
-    return console.error('Please give a name for /api/cache?name=groups')
+    return console.error('Please give a cache name, i.e. /api/cache?name=groups')
 
   let cache = await getCache(req.query.name)
   return res.json({ "hasCache": (cache ? true : false) });
@@ -42,13 +42,11 @@ app.get("/api/cache", async (req, res) => {
 
 // Find locations
 app.get("/api/findLocations", async (req, res) => {
-
   await meetup.findLocations({
     query: 'The Hague'
   }, function (err, results) {
     res.json(results);
   });
-
 });
 
 /*
@@ -75,13 +73,57 @@ app.get("/api/findGroups", async (req, res) => {
 });
 
 /*
- * Get events
+ * Get events for groups
  */
-app.get("/api/getEvents", async (req, res) => {
+app.get("/api/getEventsForGroups", async (req, res) => {
 
-  // Input validation
+  // Input validation: timespan
   if(! req.query.fromTimestamp || ! req.query.toTimestamp) {
     console.log('ERR', 'No timestamps given')
+    return;
+  }
+
+  // Input validation: groupIds
+  if(! req.query.groupIds) {
+    console.log('ERR', 'No groupIds given')
+    return;
+  }
+
+  // Define filename for cache
+  let cacheName = 'events-'+req.query.fromTimestamp+'-'+req.query.toTimestamp;
+
+  // Get from cache it's available there
+  let cache = await getCache(cacheName);
+  if(cache) return res.json(cache);
+
+  // Query Meetup API
+  await meetup.getEvents({
+    status: "past",
+    group_id: req.query.groupIds,
+    time: req.query.fromTimestamp + ',' + req.query.toTimestamp
+  }, function (err, results) {
+    // Give results back to user
+    res.json(results);
+    // Cache results
+    writeCache(cacheName, results);
+  });
+
+});
+
+/*
+ * Get events for group
+ */
+app.get("/api/getEventsForGroup", async (req, res) => {
+
+  // Input validation: timespan
+  if(! req.query.fromTimestamp || ! req.query.toTimestamp) {
+    console.log('ERR', 'No timestamps given')
+    return;
+  }
+
+  // Input validation: group
+  if(! req.query.groupUrlName) {
+    console.log('ERR', 'No groupUrlName given')
     return;
   }
 

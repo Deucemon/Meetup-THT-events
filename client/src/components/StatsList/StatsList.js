@@ -12,7 +12,6 @@ export default class StatsList extends Component {
     this.state = {
       stats: null
     }
-
   }
 
   async componentDidMount() {
@@ -59,7 +58,7 @@ export default class StatsList extends Component {
     const groups = await ApiProxy.getGroups()
 
     // Get events & RSVPs
-    const events = await ApiProxy.getEvents(groups, year, !this.state.fromCache)
+    const events = await ApiProxy.getEventsForGroups(groups, year)
     const rsvps  = ApiProxy.getRsvpsPerGroup(events)
 
     // The Hague Tech (THT) only

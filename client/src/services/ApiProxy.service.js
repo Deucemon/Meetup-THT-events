@@ -47,9 +47,35 @@ async function getEvents(groups, year, hasDelay) {
 
   // Return all events
   return eventsObject;
+
+}
+
+async function getEventsForGroups(groups, year) {
+
+  // Set year if it was not set
+  if(!year) year = 2018;
+
+  // Set timespan
+  let fromTimestamp = new Date(year + '-01-01').getTime();
+  let toTimestamp = new Date(year + '-12-31').getTime();
+
+  // Get all groupIds
+  // let groupIds = []
+  let groupIds = R.map((group) => {
+    // groupIds.push(group.id);
+    return group.id;
+  }, groups)
+
+  // Get events for these groupIds & timespan
+  const response = await fetch('/api/getEventsForGroups?groupIds='+groupIds.join()+'&fromTimestamp='+fromTimestamp+'&toTimestamp='+toTimestamp);
+  const json = await response.json();
+
+  // Return all events
+  return json.results;
 }
 
 async function getEventsForGroup(groupUrlName, year, hasDelay = true) {
+
   // Set year if it was not set
   if(!year) year = 2018;
 
@@ -67,7 +93,7 @@ async function getEventsForGroup(groupUrlName, year, hasDelay = true) {
     await sleep();
 
   // Get events for this group & timespan
-  const response = await fetch('/api/getEvents?groupUrlName='+groupUrlName+'&fromTimestamp='+fromTimestamp+'&toTimestamp='+toTimestamp);
+  const response = await fetch('/api/getEventsForGroup?groupUrlName='+groupUrlName+'&fromTimestamp='+fromTimestamp+'&toTimestamp='+toTimestamp);
   const json = await response.json();
 
   // Return
@@ -103,7 +129,7 @@ function getRsvpsPerGroup(events) {
 
 export default {
   sleep,
-  getEvents,
+  getEventsForGroups,
   isThtEvent,
   hasCache,
   getGroups,

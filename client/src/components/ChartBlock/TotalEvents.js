@@ -29,7 +29,7 @@ export default class TotalEvents extends Component {
     const groups = await ApiProxy.getGroups()
 
     // Get events
-    const events = await ApiProxy.getEvents(groups, this.props.year, !fromCache);
+    const events = await ApiProxy.getEventsForGroups(groups, this.props.year);
 
     // The Hague Tech (THT) only
     const thtEvents = R.filter(ApiProxy.isThtEvent, events)
