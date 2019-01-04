@@ -90,8 +90,8 @@ export default class StatsList extends Component {
           group_urlname: this.state.stats.rsvps[groupName].group_urlname
         });
         thtTotalRsvps += this.state.stats.thtRsvps[groupName].rsvps;
-        thtPercentage = Math.round((thtTotalRsvps/totalRsvps)*100);
       }
+      thtPercentage = Math.round((thtTotalRsvps/totalRsvps)*100);
     }
     thtRsvpList.sort((a, b) => a.rsvps - b.rsvps);
     thtRsvpList.reverse();
