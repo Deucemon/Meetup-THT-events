@@ -16,9 +16,9 @@ class AppTab extends Component {
       <div className="tab-container">
 
         <div className="flex">
-          <TotalRsvps year={this.props.year} />
-          <TotalEvents year={this.props.year} />
           <TotalGroups year={this.props.year} />
+          <TotalEvents year={this.props.year} />
+          <TotalRsvps year={this.props.year} />
         </div>
 
         {/*<RsvpsThroughTime />*/}
@@ -69,15 +69,9 @@ class App extends Component {
                 <Tab><button>2018</button></Tab>
               </nav>
             </TabList>
-            <TabPanel>
-              <AppTab year={this.state.tabIndex + 2016}></AppTab>
-            </TabPanel>
-            <TabPanel>
-              <AppTab year={this.state.tabIndex + 2016}></AppTab>
-            </TabPanel>
-            <TabPanel>
-              <AppTab year={this.state.tabIndex + 2016}></AppTab>
-            </TabPanel>
+            <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
+            <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
+            <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
           </Tabs>
         </div>
 
