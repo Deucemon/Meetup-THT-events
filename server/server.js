@@ -6,10 +6,11 @@ const CryptoJS = require('crypto-js')
 const app = express()
 
 const limit = 99999;
+const city = 'The Hague';
 
 // Import the Meetup API library, for easily using the Meetup API 
 var meetup = require('meetup-api')({
-  key: '2b2d6256e60525527675c6d494c4660'
+  key: '74492f3a52513c481b7850148286f37'
 });
 
 app.set("port", process.env.PORT || 3001);
@@ -20,6 +21,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const staticFiles = express.static(path.join(__dirname, '../../client/build'))
+
 
 app.use(staticFiles)
 
@@ -41,33 +43,41 @@ app.get("/api/cache", async (req, res) => {
   return res.json({ "hasCache": (cache ? true : false) });
 });
 
-// Find locations
-app.get("/api/findLocations", async (req, res) => {
-  await meetup.findLocations({
-    query: 'The Hague'
-  }, function (err, results) {
-    res.json(results);
-  });
-});
-
 /*
  * Find groups
  */
 app.get("/api/findGroups", async (req, res) => {
 
   // Get from cache it's available there
-  let cache = await getCache('groups');
+  let cache = await getCache('groups-'+CryptoJS.MD5(city));
   if(cache) return res.json(cache);
 
+  let config;
+  switch(city) {
+    case 'The Hague':
+      config = {
+        radius: 4,
+        lon: 4.330529,
+        lat: 52.081776
+      }
+      break;
+    case 'Rotterdam':
+      config = {
+        radius: 4,
+        lon: 4.4554598,
+        lat: 51.9248438
+      }
+      break;
+  }
+
   // Query Meetup API
-  await meetup.findGroups({
+  config = Object.assign({
     category: 34,
-    radius: 4,
-    lon: 4.330529,
-    lat: 52.081776,
     page: limit
-  }, function (err, results) {
-    writeCache('groups', results);
+  }, config);
+
+  await meetup.findGroups(config, function (err, results) {
+    writeCache('groups-'+CryptoJS.MD5(city), results);
     res.json(results);
   });
 
@@ -91,7 +101,7 @@ app.get("/api/getEventsForGroups", async (req, res) => {
   }
 
   // Define filename for cache
-  let cacheName = 'events-'+CryptoJS.MD5(req.query.groupIds)+'-'+req.query.fromTimestamp+'-'+req.query.toTimestamp;
+  let cacheName = 'events-'+CryptoJS.MD5(city)+'-'+CryptoJS.MD5(req.query.groupIds)+'-'+req.query.fromTimestamp+'-'+req.query.toTimestamp;
 
   // Get from cache it's available there
   let cache = await getCache(cacheName);
@@ -152,7 +162,7 @@ app.get("/api/getEventsForGroup", async (req, res) => {
   }
 
   // Define filename for cache
-  let cacheName = 'events-'+req.query.fromTimestamp+'-'+req.query.toTimestamp+'-'+req.query.groupUrlName;
+  let cacheName = 'events-'+CryptoJS.MD5(city)+'-'+req.query.fromTimestamp+'-'+req.query.toTimestamp+'-'+req.query.groupUrlName;
 
   // Get from cache it's available there
   let cache = await getCache(cacheName);
