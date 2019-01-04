@@ -15,23 +15,11 @@ export default class StatsList extends Component {
   }
 
   async componentDidMount() {
-    const self = this;
+    let stats = await this.getStats(this.props.year)
 
-    // Check if app has cache
-    await ApiProxy.hasCache().then(async function(fromCache, err) {
-
-      // If so: set fromCache state
-      self.setState({ fromCache: fromCache });
-
-      // Then load results
-      let stats = await self.getStats(self.props.year)
-
-      self.setState({
-        'stats': stats
-      })
-
+    this.setState({
+      'stats': stats
     })
-
   }
 
   /*

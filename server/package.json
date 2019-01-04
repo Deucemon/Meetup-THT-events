@@ -17,7 +17,7 @@
     "nodemon": "^1.18.9"
   },
   "scripts": {
-    "start": "nodemon -r babel-register server.js",
+    "start": "nodemon -r babel-register server.js --ignore client",
     "build": "babel . --ignore node_modules,build --out-dir build",
     "start:prod": "babel . --ignore node_modules,build --out-dir build && node build/server.js"
   }

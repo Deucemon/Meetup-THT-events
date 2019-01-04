@@ -2,6 +2,7 @@ const { getCache, writeCache } = require("./cache-service.js");
 
 const express = require("express")
 const path = require("path")
+const CryptoJS = require('crypto-js')
 const app = express()
 
 const limit = 99999;
@@ -90,7 +91,7 @@ app.get("/api/getEventsForGroups", async (req, res) => {
   }
 
   // Define filename for cache
-  let cacheName = 'events-'+req.query.fromTimestamp+'-'+req.query.toTimestamp;
+  let cacheName = 'events-'+CryptoJS.MD5(req.query.groupIds)+'-'+req.query.fromTimestamp+'-'+req.query.toTimestamp;
 
   // Get from cache it's available there
   let cache = await getCache(cacheName);
@@ -99,13 +100,36 @@ app.get("/api/getEventsForGroups", async (req, res) => {
   // Query Meetup API
   await meetup.getEvents({
     status: "past",
+    page: 200,// Maximum amount of results
+    offset: 0,
     group_id: req.query.groupIds,
     time: req.query.fromTimestamp + ',' + req.query.toTimestamp
-  }, function (err, results) {
-    // Give results back to user
-    res.json(results);
-    // Cache results
-    writeCache(cacheName, results);
+  }, async function (err, events) {
+
+    // If there are less than 200 results: return results
+    if(events.meta.total_count <= 200) {
+      writeCache(cacheName, events);
+      res.json(events);
+    }
+
+    // If there are more than 200 events: do another call for 'page 2'
+    else {
+      await meetup.getEvents({
+        status: "past",
+        page: 200,// Maximum amount of results
+        offset: 1,
+        group_id: req.query.groupIds,
+        time: req.query.fromTimestamp + ',' + req.query.toTimestamp
+      }, function (err, eventsPageTwo) {
+
+        for (var i = 0; i < eventsPageTwo.results.length; i++) {
+          events.results.push(eventsPageTwo.results[i]);
+        }
+
+        writeCache(cacheName, events);
+        res.json(events);
+      })
+    }
   });
 
 });

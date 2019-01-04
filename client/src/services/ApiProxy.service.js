@@ -60,9 +60,7 @@ async function getEventsForGroups(groups, year) {
   let toTimestamp = new Date(year + '-12-31').getTime();
 
   // Get all groupIds
-  // let groupIds = []
   let groupIds = R.map((group) => {
-    // groupIds.push(group.id);
     return group.id;
   }, groups)
 
