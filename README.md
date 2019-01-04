@@ -14,6 +14,10 @@ The Heroku configuration is based on:
 
     https://originmaster.com/running-create-react-app-and-express-crae-on-heroku-c39a39fe7851
 
+Deploy the app like this:
+
+    git push heroku master
+
 ## Available Scripts
 
 In the project directory, you can run:
