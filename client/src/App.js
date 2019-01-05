@@ -52,7 +52,7 @@ class App extends Component {
           </p>
 
           <p className="link-style-10">
-            We were curious: How much of the tech community growth was caused by <a href="https://www.thehaguetech.com/" rel="noopener noreferrer">The Hague Tech</a>, a new tech hub that exists for +- 1 year now.
+            We were curious: How much of the tech community growth was caused by <a href="https://www.thehaguetech.com/" target="_blank" rel="noopener noreferrer">The Hague Tech</a>, a new tech hub that exists for +- 1 year now.
           </p>
 
           <p className="link-style-10">
