@@ -5,9 +5,6 @@ const isThtEvent = (event) => event && event.venue && event.venue.name === 'The 
 
 let globalDelay = 0;
 
-// If true limits the 2018 results to september
-// const limit = false;
-
 function sleep() {
   globalDelay += 1500;
   return new Promise(resolve => setTimeout(resolve, globalDelay));
@@ -80,11 +77,6 @@ async function getEventsForGroup(groupUrlName, year, hasDelay = true) {
   // Set timespan
   let fromTimestamp = new Date(year + '-01-01').getTime();
   let toTimestamp = new Date(year + '-12-31').getTime();
-
-  // For 2018, only get results until end of September
-  // if (year === 2018 && !limit) {
-  //   toTimestamp = new Date(year + '-09-30').getTime();
-  // }
 
   // Add an delay, because of the Meetup API rate limit 
   if(hasDelay)
