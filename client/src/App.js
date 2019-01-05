@@ -98,7 +98,7 @@ class App extends Component {
 
         <footer className="Footer link-style-10">
           <p>
-            This project was initiated by <a href="https://www.linkedin.com/in/charlesulin/" target="_blank" rel="noopener noreferrer">Charles Weiler-Ulin</a>, <a href="https://github.com/Deucemon" target="_blank" rel="noopener noreferrer">Deucemon</a> & <a href="https://www.bartroorda.nl" target="_blank" rel="noopener noreferrer">bartwr</a>. You're welcome to contribute to this project: Share your ideas via <a href="mailto:mail@bartroorda.nl?subject=Hello from the-hague-meetup-stats&body=I like to">mail@bartroorda.nl</a> or start working on improving <a href="https://github.com/Deucemon/Meetup-THT-events" target="_blank" rel="noopener noreferrer">the code</a>.
+            This project was initiated by <a href="https://www.linkedin.com/in/charlesulin/" target="_blank" rel="noopener noreferrer">Charles Weiler-Ulin</a>, <a href="https://github.com/Deucemon" target="_blank" rel="noopener noreferrer">Deucemon</a> & <a href="https://www.bartroorda.nl" target="_blank" rel="noopener noreferrer">Bart Roorda</a>. You're welcome to contribute to this project: Share your ideas via <a href="mailto:mail@bartroorda.nl?subject=Hello from the-hague-meetup-stats&body=I like to">mail@bartroorda.nl</a> or start working on improving <a href="https://github.com/Deucemon/Meetup-THT-events" target="_blank" rel="noopener noreferrer">the code</a>.
           </p>
           <p>
             <a href="https://denhaag.com/en" target="_blank" rel="noopener noreferrer">The Hague</a> is a beautiful city in The Netherlands. With a tech scene. And people. Might meet you there sometime.

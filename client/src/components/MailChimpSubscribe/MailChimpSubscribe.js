@@ -18,7 +18,7 @@ export default class MailChimpSubscribe extends Component {
       <div className="MailChimpSubscribe" style={{display: this.state.hideForm ? 'none' : 'block'}}>
 
         <p>
-          <span role="img">🎪</span> We are building tools for meetup <b>venues</b> & <b>organisers</b>.&nbsp;&nbsp;Be the first to hear about our new dashboards &raquo;
+          <span role="img">🎪</span> We are building tools for <b>meetup venues</b> & <b>organisers</b>.&nbsp;&nbsp;Be the first to hear about our new dashboards &raquo;
         </p>
 
         <div id="mc_embed_signup">
