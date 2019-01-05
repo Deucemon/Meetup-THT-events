@@ -7,6 +7,7 @@ import TextBlock from './components/TextBlock/TextBlock.js';
 import TotalGroups from './components/ChartBlock/TotalGroups.js';
 import TotalEvents from './components/ChartBlock/TotalEvents.js';
 import TotalRsvps from './components/ChartBlock/TotalRsvps.js';
+import TopVenues from './components/TopVenues/TopVenues.js';
 import StatsList from './components/StatsList/StatsList.js';
 import RsvpsThroughTime from './components/Charts/RsvpsThroughTime.js';
 
@@ -14,6 +15,8 @@ class AppTab extends Component {
   render() {
     return (
       <div className="tab-container">
+
+        <TopVenues year={this.props.year} />
 
         <div className="flex">
           <TotalGroups year={this.props.year} />
