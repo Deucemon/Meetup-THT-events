@@ -9,6 +9,7 @@ import TotalEvents from './components/ChartBlock/TotalEvents.js';
 import TotalRsvps from './components/ChartBlock/TotalRsvps.js';
 import StatsList from './components/StatsList/StatsList.js';
 import RsvpsThroughTime from './components/Charts/RsvpsThroughTime.js';
+import MailChimpSubscribe from './components/MailChimpSubscribe/MailChimpSubscribe.js';
 
 class AppTab extends Component {
   render() {
@@ -59,6 +60,8 @@ class App extends Component {
           </p>
 
         </TextBlock>
+
+        <MailChimpSubscribe />
 
         <div className="App-tabs-wrapper">
           <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
