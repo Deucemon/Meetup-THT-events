@@ -38,7 +38,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { tabIndex: 0 };
+    this.state = { tabIndex: 2 };
   }
 
   render() {
