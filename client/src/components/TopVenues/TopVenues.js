@@ -35,7 +35,6 @@ export default class TopVenues extends Component {
     // Now get the unique event locations
     // ...
     let venueList = [];
-    console.log(events);
     events.forEach(function(event){
       if (! (typeof event.venue === "undefined"))  {
       venueList.push(event.venue.name);
