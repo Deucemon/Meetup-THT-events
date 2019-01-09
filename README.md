@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+﻿This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Required Node version
 
@@ -6,7 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 If you use Node Version Manager, execute:
 
-	nvm use 10.14.2
+	nvm use 10.14.2 
+	Otherwise npm install -g npm@10.14.2
 
 ## Heroku deployment information
 

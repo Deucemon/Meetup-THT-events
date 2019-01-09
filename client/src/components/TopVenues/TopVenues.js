@@ -34,26 +34,57 @@ export default class TopVenues extends Component {
 
     // Now get the unique event locations
     // ...
+    let venueList = [];
+    console.log(events);
+    events.forEach(function(event){
+      if (! (typeof event.venue === "undefined"))  {
+      venueList.push(event.venue.name);
+    }
+          
+    });
+    
+    //Eliminate duplicates
+    let uniqueVenues = [...new Set(venueList)];
+
+    //Count events per location
+    let venueCount = [];
+    for (let i = 0; i < uniqueVenues.length; i++) {
+      venueCount[i]= 0;
+      for (let j = 0; j < venueList.length; j++) {
+        if (uniqueVenues[i] === venueList[j]){
+            venueCount[i]++;
+        };
+      };  
+    };
+    //Combine into object and sort.
+    let venueRank = {};
+    for (let i = 0; i < uniqueVenues.length; i++){
+      venueRank[uniqueVenues[i]] = venueCount[i];
+    };
+    let venueSort = [];
+    for (let venue in venueRank) {
+      venueSort.push([venue, venueRank[venue]]);
+    };
+    
 
     // Sort event locations on most popular 'count'
     // ...
+    venueSort.sort(function(a, b) {
+      return b[1] - a[1];
+    });
+    const topThree = venueSort.slice(0,3);
+    let topVenues = [];
+    for (let i =0; i < topThree.length; i++) {
+      topVenues[i] = {name : topThree[i][0], address_1: "",city:"", count:topThree[i][1] };
+    };
+    
+    
+    
+
 
     // return topVenues;
 
-    return [
-      {
-        name: "NCIM",
-        address_1: "Overgoo 11",
-        city: "Leidschendam",
-        count: 20
-      },
-      {
-        name: "het Ondernemerscafé",
-        address_1: "Binckhorstlaan 36 M.5.00",
-        city: "Den Haag",
-        count: 10
-      }
-    ]
+    return topVenues
   }
 
   renderVenue(venue) {
