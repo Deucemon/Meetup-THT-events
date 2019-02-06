@@ -71,7 +71,7 @@ class App extends Component {
             <p className="link-style-10">
               On this page you find some nice stats, based on the <a href="https://www.meetup.com" target="_blank" rel="noopener noreferrer"><img src="/logo/meetup.svg" height="30" alt="Meetup" style={{position: 'relative', top: '7px'}} /></a> API. All is <a href="https://github.com/Deucemon/Meetup-THT-events" target="_blank" rel="noopener noreferrer">open source</a>, feel free to contribute. Enjoy!
             </p>
-          </div>
+          </div> 
 
         </TextBlock>
 
