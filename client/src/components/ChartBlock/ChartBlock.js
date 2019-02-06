@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ApiProxy from '../../services/ApiProxy.service.js';
 import './ChartBlock.css';
 
 export default class ChartBlock extends Component {
@@ -12,7 +13,7 @@ export default class ChartBlock extends Component {
         
         <div>
 
-          <small>
+          <small style={{display: ApiProxy.getCity() == 'The Hague' ? 'block' : 'none'}}>
             {this.props.secondaryStat}
           </small>
 

@@ -49,6 +49,16 @@ class App extends Component {
 
         <TextBlock title={ApiProxy.getCity() + ' - Tech'}>
 
+          <div style={{display: ApiProxy.getCity() != 'The Hague' ? 'block' : 'none'}}>
+            <p className="link-style-10">
+              On this page you see the top visited Meetup groups of <b>{ApiProxy.getCity()}</b> that are categorized as <b>Tech</b>.
+            </p>
+
+            <p className="link-style-10">
+              The stats are from the <a href="https://www.meetup.com" target="_blank" rel="noopener noreferrer"><img src="/logo/meetup.svg" height="30" alt="Meetup" style={{position: 'relative', top: '7px'}} /></a> API. All is <a href="https://github.com/Deucemon/Meetup-THT-events" target="_blank" rel="noopener noreferrer">open source</a>, feel free to contribute. Enjoy!
+            </p>
+          </div>
+
           <div style={{display: ApiProxy.getCity() == 'The Hague' ? 'block' : 'none'}}>
             <p className="link-style-10">
               We are happy to see that <a href="https://denhaag.com/en" target="_blank" rel="noopener noreferrer">The Hague</a> is <a href="https://2018.stateofeuropeantech.com/chapter/tech-hubs/article/growing-communities/#chart-25" target="_blank" rel="noopener noreferrer">listed</a> as one of the top growing tech cities in the world.

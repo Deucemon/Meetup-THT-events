@@ -100,7 +100,7 @@ export default class StatsList extends Component {
       <div className="StatsList">
 
         <h2>
-          RSVPs for groups in The Hague, {this.props.year}
+          RSVPs for groups in {ApiProxy.getCity()}, {this.props.year}
         </h2>
 
         <div className="group-list link-style-10">
@@ -113,21 +113,25 @@ export default class StatsList extends Component {
 
         </div>
 
-        <h2>
-          RSVPs at The Hague Tech, {this.props.year}
-        </h2>
+        <div style={{display: ApiProxy.getCity() == 'The Hague' ? 'block' : 'none'}}>
 
-        <div className="group-list link-style-10">
-          {R.map(this.renderGroup.bind(this), thtRsvpList)}
-          <div className="group-list-row"  id="rsvp2">
-            <b>Total RSVP's</b>
-            <span>{thtTotalRsvps}</span>
+          <h2>
+            RSVPs at The Hague Tech, {this.props.year}
+          </h2>
+
+          <div className="group-list link-style-10">
+            {R.map(this.renderGroup.bind(this), thtRsvpList)}
+            <div className="group-list-row"  id="rsvp2">
+              <b>Total RSVP's</b>
+              <span>{thtTotalRsvps}</span>
+            </div>
+            <p className="group-list-row"  id="rsvp2">
+              <b>Percentage of Total RSVP's</b> 
+              <span>{thtPercentage}%</span> 
+            </p>
           </div>
-          <p className="group-list-row"  id="rsvp2">
-            <b>Percentage of Total RSVP's</b> 
-            <span>{thtPercentage}%</span> 
-          </p>
-        </div>
+
+         </div>
 
       </div>
     )

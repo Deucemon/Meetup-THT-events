@@ -7,7 +7,7 @@ export default class Banner extends Component {
       <div className="Banner link-style-10">
 
         <p>
-          <span role="img">🏙</span> <a href="?city=The Hague">#thisisthehague</a>.
+          <span role="img">🏙</span> <a href="/">#thisisthehague</a>.
           &nbsp;Curious to
           &nbsp;<span role="img">🌇</span> <a href="?city=Amsterdam">Amsterdam</a> and 
           &nbsp;<span role="img">🌃</span> <a href="?city=Rotterdam">Rotterdam</a>?
