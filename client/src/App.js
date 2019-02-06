@@ -75,7 +75,7 @@ class App extends Component {
 
         </TextBlock>
 
-        <MailChimpSubscribe />
+        <Banner />
 
         <div className="App-tabs-wrapper">
           <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
@@ -114,7 +114,7 @@ class App extends Component {
           </div>
         </TextBlock>
 
-        <Banner />
+        <MailChimpSubscribe />
 
         <footer className="Footer link-style-10">
           <p>
