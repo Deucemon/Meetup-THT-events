@@ -4,7 +4,7 @@ import './TextBlock.css';
 export default class TextBlock extends Component {
   render() {
     return (
-      <div className="TextBlock">
+      <div className="TextBlock" style={Object.assign({}, this.props.style)}>
 
         <h1>
           {this.props.title}

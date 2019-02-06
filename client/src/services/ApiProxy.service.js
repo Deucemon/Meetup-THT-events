@@ -134,5 +134,6 @@ export default {
   isThtEvent,
   hasCache,
   getGroups,
-  getRsvpsPerGroup
+  getRsvpsPerGroup,
+  getCity
 }

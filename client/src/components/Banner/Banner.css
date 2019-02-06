@@ -1,0 +1,19 @@
+.Banner {
+  max-width: 92%;
+  width: 680px;
+
+  background-color: #fff2cc;
+  border-radius: 11px;
+  font-size: .8em;
+  padding: .75em 1.5em 1.4em 1.5em;
+  display: block;
+  margin: 0 auto 40px auto;
+  line-height: 1.5em;
+  color: #333;
+  text-align: center;
+  transition: all .3s ease-in-out;
+}
+
+.Banner [role="img"] {
+  font-size: 20px;
+}
