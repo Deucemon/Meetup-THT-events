@@ -70,8 +70,10 @@ class App extends Component {
                 <Tab><button>2016</button></Tab>
                 <Tab><button>2017</button></Tab>
                 <Tab><button>2018</button></Tab>
+                <Tab><button>2019</button></Tab>
               </nav>
             </TabList>
+            <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
             <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
             <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
             <TabPanel><AppTab year={this.state.tabIndex + 2016}></AppTab></TabPanel>
