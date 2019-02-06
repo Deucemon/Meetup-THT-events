@@ -6,7 +6,6 @@ const CryptoJS = require('crypto-js')
 const app = express()
 
 const limit = 99999;
-const city = 'The Hague';
 
 // Import the Meetup API library, for easily using the Meetup API 
 var meetup = require('meetup-api')({
@@ -48,24 +47,34 @@ app.get("/api/cache", async (req, res) => {
  */
 app.get("/api/findGroups", async (req, res) => {
 
+  let city = req.query.city;
+
   // Get from cache it's available there
   let cache = await getCache('groups-'+CryptoJS.MD5(city));
   if(cache) return res.json(cache);
 
   let config;
   switch(city) {
-    case 'The Hague':
-      config = {
-        radius: 4,
-        lon: 4.330529,
-        lat: 52.081776
-      }
-      break;
     case 'Rotterdam':
       config = {
         radius: 4,
         lon: 4.4554598,
         lat: 51.9248438
+      }
+      break;
+    case 'Amsterdam':
+      config = {
+        radius: 4,
+        lon: 4.828412,
+        lat: 52.3547321
+      }
+      break;
+    case 'The Hague':
+    default:
+      config = {
+        radius: 4,
+        lon: 4.330529,
+        lat: 52.081776
       }
       break;
   }
@@ -87,6 +96,11 @@ app.get("/api/findGroups", async (req, res) => {
  * Get events for groups
  */
 app.get("/api/getEventsForGroups", async (req, res) => {
+
+  let city = req.query.city;
+  const allowedCities = ['Rotterdam', 'The Hague', 'Amsterdam']
+  if( ! city || allowedCities.indexOf(city) == -1 )
+    city = 'The Hague';
 
   // Input validation: timespan
   if(! req.query.fromTimestamp || ! req.query.toTimestamp) {

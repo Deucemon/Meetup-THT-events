@@ -17,8 +17,19 @@ async function hasCache() {
   return json.hasCache;
 }
 
+function getCity() {
+  const allowedCities = ['Rotterdam', 'The Hague', 'Amsterdam']
+  // Get 'city' query param
+  const urlParams = new URLSearchParams(window.location.search)
+  const city = urlParams.get('city')
+  // Return city. Default to The Hague
+  return ! city || allowedCities.indexOf(city) == -1 ? 'The Hague' : city;
+}
+
 async function getGroups() {
-  const response = await fetch('/api/findGroups');
+  const city = getCity()
+  // Create API response
+  const response = await fetch('/api/findGroups' + (city ? '?city='+city : ''));
   const json = await response.json();
 
   return json;
