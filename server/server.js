@@ -82,7 +82,7 @@ app.get("/api/findGroups", async (req, res) => {
   // Query Meetup API
   config = Object.assign({
     category: 34,
-    page: limit
+    page: limit > 40 ? 40 : limit
   }, config);
 
   await meetup.findGroups(config, function (err, results) {
