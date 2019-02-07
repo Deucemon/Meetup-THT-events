@@ -123,41 +123,33 @@ app.get("/api/getEventsForGroups", async (req, res) => {
   if(cache) return res.json(cache);
 
   // Query Meetup API
-  await meetup.getEvents({
-    status: "past",
-    page: 200,// Maximum amount of results
-    offset: 0,
-    group_id: req.query.groupIds,
-    time: req.query.fromTimestamp + ',' + req.query.toTimestamp
-  }, async function (err, events) {
+  let getEventsNow = async (allEvents = {results: []}, offset = 0) => {
+    await meetup.getEvents({
+      status: "past",
+      page: 200,// Maximum amount of results
+      offset: offset,
+      group_id: req.query.groupIds,
+      time: req.query.fromTimestamp + ',' + req.query.toTimestamp
+    }, function (err, events) {
 
-    // If there are less than 200 results: return results
-    if(events.meta.total_count <= 200) {
-      writeCache(cacheName, events);
-      res.json(events);
-    }
+      for (var i = 0; i < events.results.length; i++) {
+        allEvents.results.push(events.results[i]);
+      }
 
-    // If there are more than 200 events: do another call for 'page 2'
-    else {
-      await meetup.getEvents({
-        status: "past",
-        page: 200,// Maximum amount of results
-        offset: 1,
-        group_id: req.query.groupIds,
-        time: req.query.fromTimestamp + ',' + req.query.toTimestamp
-      }, function (err, eventsPageTwo) {
+      // If there are less than 200 results: return results
+      if(events.meta.total_count <= (200 * (offset+1))) {
+        writeCache(cacheName, allEvents);
+        res.json(allEvents);
+      }
 
-        for (var i = 0; i < eventsPageTwo.results.length; i++) {
-          events.results.push(eventsPageTwo.results[i]);
-        }
-
-        writeCache(cacheName, events);
-        res.json(events);
-      })
-    }
-  });
-
-});
+      // If there are more than 200 events: do another call for 'page 2'
+      else {
+        getEventsNow(allEvents, (offset+1))
+      }
+    });
+  }
+  getEventsNow();
+})
 
 /*
  * Get events for group

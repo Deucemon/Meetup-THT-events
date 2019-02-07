@@ -111,7 +111,10 @@ function getRsvpsPerGroup(events) {
   for (let i = events.length - 1; i >= 0; i--) {
     event = events[i];
 
-    if(!event) break;
+    if(!event) {
+      console.log('Strange. No event, getRsvpsPerGroup');
+      break;
+    }
 
     // If this is the first event for this group: Return RSVP count.
     if( ! rsvpsPerGroup[event.group.name])
@@ -123,6 +126,13 @@ function getRsvpsPerGroup(events) {
     // Otherwise: Sum up
     else
       rsvpsPerGroup[event.group.name].rsvps += event.yes_rsvp_count;
+
+    var date = new Date(event.created*1000);
+
+    if(event.group.name.indexOf('Permissionless Society Blockchains') > -1) {
+      console.log(date.toDateString(), event.group.name, event.name, rsvpsPerGroup[event.group.name].rsvps);
+    }
+
   }
 
   return rsvpsPerGroup;
