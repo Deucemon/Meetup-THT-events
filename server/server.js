@@ -82,7 +82,7 @@ app.get("/api/findGroups", async (req, res) => {
   // Query Meetup API
   config = Object.assign({
     category: 34,
-    order: most_active,
+    order: 'most_active',
     page: limit > 80 ? 80 : limit
   }, config);
 
